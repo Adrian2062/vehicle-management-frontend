@@ -1,0 +1,192 @@
+:root {
+  /* Material Design 3 Inspired Palette */
+  --color-primary: #1a1a1a;        /* Material Dark */
+  --color-blue: linear-gradient(195deg, #49a3f1 0%, #1A73E8 100%);
+  --color-pink: linear-gradient(195deg, #EC407A 0%, #D81B60 100%);
+  --color-green: linear-gradient(195deg, #66BB6A 0%, #43A047 100%);
+  --color-orange: linear-gradient(195deg, #FFA726 0%, #FB8C00 100%);
+  --color-dark: linear-gradient(195deg, #42424a 0%, #191919 100%);
+  
+  --color-bg-main: #f0f2f5;
+  --color-bg-sidebar: #1a1a1a;
+  --color-bg-card: #ffffff;
+  
+  --color-text-main: #344767;
+  --color-text-muted: #7b809a;
+  
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  --shadow-material: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-header: 0 4px 20px 0 rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(0, 0, 0, 0.4);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', 'Inter', sans-serif;
+  background-color: var(--color-bg-main);
+  color: var(--color-text-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Layout */
+.dashboard-container {
+  display: flex;
+  padding: 24px;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 280px; /* Account for floating sidebar width + gap */
+  padding-top: 10px;
+}
+
+/* Floating Sidebar */
+.sidebar {
+  width: 260px;
+  height: calc(100vh - 48px);
+  background: var(--color-dark);
+  border-radius: var(--radius-lg);
+  position: fixed;
+  left: 24px;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0;
+  z-index: 1000;
+  box-shadow: var(--shadow-material);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 16px;
+  padding: 12px 16px;
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.nav-item.active {
+  background: var(--color-blue);
+  color: white;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(0, 188, 212, 0.4);
+}
+
+/* Material Cards */
+.card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-material);
+  position: relative;
+  padding: 24px;
+  margin-top: 40px; /* Increased to account for floating header overlap */
+}
+
+/* Add extra top padding if card has a floating header */
+.card-with-header {
+  padding-top: 48px; 
+}
+
+/* Floating Card Header */
+.card-header-float {
+  position: absolute;
+  top: -24px;
+  left: 16px;
+  right: 16px;
+  height: 64px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  color: white;
+  box-shadow: var(--shadow-header);
+}
+
+.header-blue { background: var(--color-blue); }
+.header-pink { background: var(--color-pink); }
+.header-green { background: var(--color-green); }
+.header-orange { background: var(--color-orange); }
+.header-dark { background: var(--color-dark); }
+
+/* Stats Card Utility */
+.stat-icon-float {
+  width: 64px;
+  height: 64px;
+  position: absolute;
+  top: -24px;
+  left: 16px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: var(--shadow-header);
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  padding: 16px 16px;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid #f0f2f5;
+  font-weight: 700;
+  background-color: #fafbfc; /* Added subtle background for th */
+}
+
+td {
+  padding: 16px;
+  border-bottom: 1px solid #f0f2f5;
+  font-size: 14px;
+}
+
+/* Buttons */
+.btn {
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary { background: var(--color-dark); color: white; }
+.btn-primary:hover { box-shadow: var(--shadow-header); transform: translateY(-1px); }
+
+.label-caps {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+/* Grid & Spacing */
+.grid-cols-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.m-b-xl { margin-bottom: 48px; }
