@@ -12,7 +12,7 @@ import {
   Clock, 
   Calendar,
   LogOut,
-  BarChart3,
+  BarChart,
   Mail,
   ClipboardList
 } from 'lucide-react';
@@ -31,7 +31,7 @@ const Sidebar = ({ activeScreen, setActiveScreen, userRole, onLogout }) => {
     { id: 'SalesInvoice', label: 'POS Terminal', icon: ShoppingCart },
     { id: 'CustomerSearch', label: 'Lookup', icon: Search },
     { id: 'CustomerDetails', label: 'Profiles', icon: ClipboardList },
-    { id: 'CustomerReports', label: 'Insights', icon: BarChart3 },
+    { id: 'CustomerReports', label: 'Insights', icon: BarChart },
     { id: 'EmailInvoice', label: 'Invoicing', icon: Mail },
   ];
 

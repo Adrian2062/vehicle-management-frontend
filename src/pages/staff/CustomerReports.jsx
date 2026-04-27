@@ -1,5 +1,5 @@
 import React from 'react';
-import { BarChart3, Users, TrendingUp, AlertTriangle } from 'lucide-react';
+import { BarChart, Users, TrendingUp, AlertTriangle } from 'lucide-react';
 
 const CustomerReports = () => {
   const categories = [
