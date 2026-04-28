@@ -9,11 +9,11 @@ const Notifications = () => {
   const [activeTab, setActiveTab] = useState('All');
 
   const notifications = [
-    { id: 1, type: 'inventory', title: 'Critical Stock Level', msg: 'Engine Oil Filter (SKU: OF-202) is currently at 3 units. Minimum threshold is 10.', time: '12:45 PM', date: 'Today', icon: Package, color: 'var(--color-pink)', action: 'Restock Now' },
-    { id: 2, type: 'financial', title: 'Bulk Purchase Completed', msg: 'Order #PUR-7781 for "Radiator Fans" has been processed and paid.', time: '10:30 AM', date: 'Today', icon: ShoppingCart, color: 'var(--color-green)', action: 'View Invoice' },
-    { id: 3, type: 'system', title: 'New Staff Registered', msg: 'Robert Fox has been added as a "Technician" to the system.', time: 'Yesterday', date: 'Yesterday', icon: UserPlus, color: 'var(--color-blue)', action: 'View Profile' },
-    { id: 4, type: 'financial', title: 'Unpaid Credit Reminder', msg: 'Customer "Alice Wilson" has a pending balance of $450.00 for 32 days.', time: 'Yesterday', date: 'Yesterday', icon: AlertTriangle, color: 'var(--color-orange)', action: 'Send Reminder' },
-    { id: 5, type: 'system', title: 'Backup Successful', msg: 'Full database backup has been archived to secure storage.', time: 'Apr 25, 2024', date: 'Older', icon: FileText, color: 'var(--color-dark)', action: 'Download Log' },
+    { id: 1, type: 'inventory', title: 'Critical Stock Level', msg: 'Engine Oil Filter (SKU: OF-202) is currently at 3 units. Minimum threshold is 10.', time: '12:45 PM', date: 'Today', icon: Package, color: '#ec4899', action: 'Restock Now' },
+    { id: 2, type: 'financial', title: 'Bulk Purchase Completed', msg: 'Order #PUR-7781 for "Radiator Fans" has been processed and paid.', time: '10:30 AM', date: 'Today', icon: ShoppingCart, color: '#10b981', action: 'View Invoice' },
+    { id: 3, type: 'system', title: 'New Staff Registered', msg: 'Robert Fox has been added as a "Technician" to the system.', time: 'Yesterday', date: 'Yesterday', icon: UserPlus, color: '#3b82f6', action: 'View Profile' },
+    { id: 4, type: 'financial', title: 'Unpaid Credit Reminder', msg: 'Customer "Alice Wilson" has a pending balance of $450.00 for 32 days.', time: 'Yesterday', date: 'Yesterday', icon: AlertTriangle, color: '#f59e0b', action: 'Send Reminder' },
+    { id: 5, type: 'system', title: 'Backup Successful', msg: 'Full database backup has been archived to secure storage.', time: 'Apr 25, 2024', date: 'Older', icon: FileText, color: '#1e293b', action: 'Download Log' },
   ];
 
   const filteredNotifications = activeTab === 'All' 
@@ -22,102 +22,83 @@ const Notifications = () => {
 
   const Tab = ({ label }) => (
     <button 
-      onClick={() => setActiveScreen(label)} // Note: Simplified for logic
-      style={{ 
-        padding: '10px 20px', 
-        background: activeTab === label ? 'var(--color-blue)' : 'transparent', 
-        color: activeTab === label ? 'white' : 'var(--color-text-muted)',
-        border: 'none',
-        borderRadius: '8px',
-        fontSize: '13px',
-        fontWeight: '700',
-        cursor: 'pointer',
-        transition: 'all 0.2s ease'
-      }}
       onClick={() => setActiveTab(label)}
+      className={`px-6 py-2.5 rounded-xl text-xs font-extrabold uppercase tracking-widest transition-all duration-300 ${
+        activeTab === label 
+        ? 'bg-blue-500 text-white shadow-header' 
+        : 'bg-transparent text-text-muted hover:bg-slate-50'
+      }`}
     >
       {label}
     </button>
   );
 
   return (
-    <div style={{ paddingBottom: '40px' }}>
-      <div className="card" style={{ marginTop: '40px' }}>
-        <div className="card-header-float header-dark">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-            <h4 style={{ color: 'white', margin: 0, fontSize: '16px' }}>Notification Center</h4>
-            <div style={{ display: 'flex', gap: '8px' }}>
-              <button style={{ background: 'rgba(255,255,255,0.15)', border: 'none', color: 'white', padding: '6px 12px', borderRadius: '4px', fontSize: '11px', fontWeight: '700', cursor: 'pointer' }}>
-                <Check size={12} style={{ marginRight: '6px' }} /> Mark All Read
+    <div className="pb-10">
+      <div className="bg-white rounded-xl shadow-material relative overflow-hidden mt-10 border border-slate-100">
+        <div className="absolute top-0 left-0 right-0 h-16 rounded-t-xl flex items-center px-8 text-white shadow-header bg-dark-gradient">
+          <div className="flex justify-between w-full items-center">
+            <div className="flex items-center gap-3">
+              <Bell size={18} className="text-white/60" />
+              <h4 className="m-0 text-base font-bold">Encrypted Notification Center</h4>
+            </div>
+            <div className="flex gap-3">
+              <button className="px-4 py-1.5 rounded-lg bg-white/10 text-white text-[10px] font-extrabold uppercase tracking-widest hover:bg-white/20 transition-all border border-white/10 flex items-center gap-2">
+                <Check size={14} /> Mark Read
               </button>
-              <button style={{ background: 'rgba(255,255,255,0.15)', border: 'none', color: 'white', padding: '6px 12px', borderRadius: '4px', fontSize: '11px', fontWeight: '700', cursor: 'pointer' }}>
-                <Trash2 size={12} style={{ marginRight: '6px' }} /> Clear All
+              <button className="px-4 py-1.5 rounded-lg bg-white/10 text-white text-[10px] font-extrabold uppercase tracking-widest hover:bg-white/20 transition-all border border-white/10 flex items-center gap-2">
+                <Trash2 size={14} /> Clear All
               </button>
             </div>
           </div>
         </div>
         
-        <div style={{ marginTop: '40px' }}>
-          <div style={{ display: 'flex', gap: '12px', marginBottom: '32px', borderBottom: '1px solid #f0f2f5', paddingBottom: '16px' }}>
+        <div className="p-8 pt-20">
+          <div className="flex gap-3 mb-8 border-b border-slate-100 pb-6">
             <Tab label="All" />
             <Tab label="Inventory" />
             <Tab label="Financial" />
             <Tab label="System" />
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <div className="space-y-4">
             {filteredNotifications.map((notif) => (
-              <div key={notif.id} className="notif-item" style={{ 
-                display: 'flex', 
-                gap: '20px', 
-                padding: '20px', 
-                borderRadius: '16px', 
-                border: '1px solid #f1f5f9',
-                background: '#fff',
-                transition: 'all 0.2s ease',
-                position: 'relative',
-                overflow: 'hidden'
-              }}>
-                <div style={{ 
-                  width: '48px', 
-                  height: '48px', 
-                  borderRadius: '12px', 
-                  background: notif.color, 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center', 
-                  color: 'white',
-                  boxShadow: 'var(--shadow-header)'
-                }}>
-                  <notif.icon size={22} />
+              <div key={notif.id} className="relative bg-white rounded-2xl border border-slate-100 p-6 flex gap-6 hover:shadow-material transition-all group overflow-hidden">
+                {/* Left status accent line */}
+                <div className="absolute left-0 top-0 bottom-0 w-1.5 group-hover:w-2 transition-all" style={{ background: notif.color }}></div>
+                
+                <div 
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-header shrink-0 group-hover:scale-110 transition-transform"
+                  style={{ background: notif.color }}
+                >
+                  <notif.icon size={24} />
                 </div>
                 
-                <div style={{ flex: 1 }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-                    <h5 style={{ margin: 0, fontSize: '15px', fontWeight: '800', color: 'var(--color-text-main)' }}>{notif.title}</h5>
-                    <span style={{ fontSize: '12px', color: 'var(--color-text-muted)', fontWeight: '600' }}>{notif.time}</span>
+                <div className="flex-1">
+                  <div className="flex justify-between items-start mb-1">
+                    <h5 className="m-0 text-base font-extrabold text-text-main tracking-tight group-hover:text-blue-500 transition-colors">{notif.title}</h5>
+                    <span className="text-xs font-extrabold text-text-muted uppercase tracking-widest">{notif.time}</span>
                   </div>
-                  <p style={{ margin: '0 0 16px 0', fontSize: '14px', color: 'var(--color-text-muted)', lineHeight: '1.5' }}>{notif.msg}</p>
+                  <p className="m-0 text-sm text-text-muted font-medium leading-relaxed mb-5">{notif.msg}</p>
                   
-                  <div style={{ display: 'flex', gap: '12px' }}>
-                    <button className="btn" style={{ background: 'var(--color-bg-main)', color: 'var(--color-text-main)', padding: '8px 16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div className="flex gap-3">
+                    <button className="px-5 py-2 rounded-xl bg-slate-50 border border-slate-100 text-[11px] font-extrabold uppercase tracking-widest text-text-main flex items-center gap-2 hover:bg-white hover:shadow-sm transition-all">
                       {notif.action}
-                      <ChevronRight size={14} />
+                      <ChevronRight size={14} className="text-text-muted" />
                     </button>
-                    <button className="btn" style={{ padding: '8px 16px', background: 'transparent', color: 'var(--color-text-muted)' }}>Dismiss</button>
+                    <button className="px-5 py-2 rounded-xl bg-transparent text-[11px] font-extrabold uppercase tracking-widest text-text-muted hover:text-red-500 transition-colors">
+                      Dismiss
+                    </button>
                   </div>
                 </div>
-
-                {/* Left status accent line */}
-                <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '4px', background: notif.color }}></div>
               </div>
             ))}
 
             {filteredNotifications.length === 0 && (
-              <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--color-text-muted)' }}>
-                <Bell size={48} style={{ opacity: 0.2, marginBottom: '16px' }} />
-                <p style={{ fontWeight: '700' }}>All caught up!</p>
-                <p style={{ fontSize: '13px' }}>No {activeTab.toLowerCase()} notifications found.</p>
+              <div className="text-center py-24 border-2 border-dashed border-slate-100 rounded-3xl">
+                <Bell size={64} className="mx-auto text-slate-100 mb-6" />
+                <p className="text-lg font-extrabold text-text-main tracking-tight m-0">All System Logs Clear</p>
+                <p className="text-sm font-medium text-text-muted mt-1">No active {activeTab.toLowerCase()} anomalies detected in current cycle.</p>
               </div>
             )}
           </div>

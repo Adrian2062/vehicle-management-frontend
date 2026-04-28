@@ -1,110 +1,122 @@
 import React, { useState } from 'react';
-import { Search, Filter, Eye, Phone, MapPin, Car, Hash, ArrowRight } from 'lucide-react';
+import { Search, Filter, Eye, Phone, MapPin, Car, Hash, ArrowRight, User, MoreVertical, ShieldCheck, Mail } from 'lucide-react';
 import Pagination from '../../components/Pagination';
 
 const CustomerSearch = () => {
   return (
-    <div>
-      <div style={{ marginBottom: '32px' }}>
-        <h1 style={{ fontSize: '28px', marginBottom: '8px' }}>Customer Lookup</h1>
-        <p style={{ color: 'var(--color-text-muted)' }}>Search and filter customers by vehicle plate, phone, or identity.</p>
-      </div>
-
-      <div className="card" style={{ marginBottom: '32px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr auto', gap: '16px', alignItems: 'center' }}>
-          <div style={{ position: 'relative' }}>
-            <Search size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-muted)' }} />
-            <input 
-              type="text" 
-              placeholder="Search Name, Phone, or Plate (e.g. ABC-1234)..." 
-              style={{ width: '100%', padding: '12px 12px 12px 40px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', outline: 'none' }} 
-            />
-          </div>
-          <select style={{ padding: '12px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', backgroundColor: 'white', outline: 'none' }}>
-            <option>All Vehicle Types</option>
-            <option>Sedan</option>
-            <option>SUV</option>
-            <option>Truck</option>
-          </select>
-          <select style={{ padding: '12px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', backgroundColor: 'white', outline: 'none' }}>
-            <option>Status: All</option>
-            <option>Active</option>
-            <option>Pending Credit</option>
-          </select>
-          <button className="btn btn-primary" style={{ padding: '12px 24px' }}>Search</button>
+    <div className="pb-10">
+      {/* Page Header */}
+      <div className="flex justify-between items-center mb-10">
+        <div>
+          <h2 className="text-2xl font-extrabold text-text-main m-0 tracking-tight">Customer Intelligence Hub</h2>
+          <p className="text-text-muted text-sm font-medium mt-1">Query customer databases using vehicle plates, phone numbers, or unique identifiers.</p>
         </div>
       </div>
 
-      <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
-        <table style={{ width: '100%' }}>
-          <thead>
-            <tr>
-              <th style={{ paddingLeft: '24px' }}>Customer</th>
-              <th>Vehicle Details</th>
-              <th>Contact Info</th>
-              <th>Status</th>
-              <th style={{ textAlign: 'right', paddingRight: '24px' }}>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {[
-              { id: 'C-001', name: 'Jane Doe', plate: 'ABC-1234', type: 'Toyota Camry', phone: '+1 555-1234', status: 'Active' },
-              { id: 'C-002', name: 'Robert Smith', plate: 'XYZ-9876', type: 'Honda Civic', phone: '+1 555-5678', status: 'Active' },
-              { id: 'C-003', name: 'Alice Wilson', plate: 'GHI-5566', type: 'Ford F-150', phone: '+1 555-9012', status: 'Pending Credit' }
-            ].map(item => (
-              <tr key={item.id}>
-                <td style={{ paddingLeft: '24px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: 'var(--color-primary-light)', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '700' }}>
-                      {item.name[0]}
-                    </div>
-                    <div>
-                      <p style={{ fontWeight: '700', marginBottom: '2px' }}>{item.name}</p>
-                      <p style={{ fontSize: '11px', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        <Hash size={10} /> {item.id}
-                      </p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <Car size={16} style={{ color: 'var(--color-text-muted)' }} />
-                    <div>
-                      <p style={{ fontWeight: '600', fontSize: '13px' }}>{item.plate}</p>
-                      <p style={{ fontSize: '12px', color: 'var(--color-text-muted)' }}>{item.type}</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                    <p style={{ fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <Phone size={12} style={{ color: 'var(--color-text-muted)' }} /> {item.phone}
-                    </p>
-                  </div>
-                </td>
-                <td>
-                  <span style={{ 
-                    padding: '4px 10px', 
-                    borderRadius: 'var(--radius-full)', 
-                    backgroundColor: item.status === 'Active' ? '#ecfdf5' : '#fff7ed', 
-                    color: item.status === 'Active' ? '#10b981' : '#f97316', 
-                    fontSize: '11px', 
-                    fontWeight: '700' 
-                  }}>
-                    {item.status}
-                  </span>
-                </td>
-                <td style={{ textAlign: 'right', paddingRight: '24px' }}>
-                  <button className="btn btn-secondary" style={{ padding: '6px 12px', fontSize: '12px' }}>
-                    View Profile
-                    <ArrowRight size={14} />
-                  </button>
-                </td>
+      {/* Advanced Search & Filter Bar */}
+      <div className="bg-white rounded-xl shadow-material p-6 mb-10 border border-slate-100">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+          <div className="md:col-span-2 relative group">
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted group-focus-within:text-blue-500 transition-colors">
+              <Search size={18} />
+            </div>
+            <input 
+              type="text" 
+              placeholder="Search Name, Phone, or Plate (e.g. ABC-1234)..." 
+              className="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 text-sm font-extrabold text-text-main outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 shadow-sm transition-all placeholder:text-text-muted/40" 
+            />
+          </div>
+          <select className="px-4 py-3 rounded-xl border border-slate-200 text-sm font-extrabold text-text-main outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 shadow-sm bg-white cursor-pointer appearance-none transition-all">
+            <option>All Vehicle Types</option>
+            <option>Sedan</option>
+            <option>SUV</option>
+            <option>Truck / Utility</option>
+            <option>Performance</option>
+          </select>
+          <button className="px-6 py-3 bg-blue-500 text-white rounded-xl text-xs font-extrabold uppercase tracking-widest hover:bg-black shadow-header transition-all transform active:scale-95 flex items-center justify-center gap-2">
+            <Search size={16} /> Execute Search
+          </button>
+        </div>
+      </div>
+
+      {/* Main Results Directory */}
+      <div className="bg-white rounded-xl shadow-material relative overflow-hidden border border-slate-100">
+        <div className="absolute top-0 left-0 right-0 h-16 rounded-t-xl flex items-center px-6 text-white shadow-header bg-dark-gradient">
+          <div className="flex justify-between w-full items-center">
+            <h4 className="m-0 text-base font-bold">Search Results Portfolio</h4>
+            <div className="flex items-center gap-4">
+              <span className="text-[10px] font-extrabold text-white/50 uppercase tracking-widest">3 RESULTS FOUND</span>
+              <button className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-all border border-white/10"><Filter size={14} /></button>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mt-20">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="bg-slate-50/50">
+                <th className="pl-6 py-4 text-[11px] uppercase text-text-muted font-extrabold border-b border-[#f0f2f5] text-left">CUSTOMER IDENTITY</th>
+                <th className="py-4 text-[11px] uppercase text-text-muted font-extrabold border-b border-[#f0f2f5] text-left">PRIMARY VEHICLE</th>
+                <th className="py-4 text-[11px] uppercase text-text-muted font-extrabold border-b border-[#f0f2f5] text-left">COMMUNICATION</th>
+                <th className="py-4 text-[11px] uppercase text-text-muted font-extrabold border-b border-[#f0f2f5] text-left">STATUS</th>
+                <th className="pr-6 py-4 border-b border-[#f0f2f5] text-right text-[11px] uppercase text-text-muted font-extrabold">ACTIONS</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        <Pagination totalItems={156} itemsPerPage={10} currentPage={1} />
+            </thead>
+            <tbody>
+              {[
+                { id: 'C-001', name: 'Jane Doe', plate: 'ABC-1234', type: 'Toyota Camry SE', phone: '+1 555-1234', status: 'ACTIVE', color: '#10b981' },
+                { id: 'C-002', name: 'Robert Smith', plate: 'XYZ-9876', type: 'Honda Civic Sport', phone: '+1 555-5678', status: 'ACTIVE', color: '#10b981' },
+                { id: 'C-003', name: 'Alice Wilson', plate: 'GHI-5566', type: 'Ford F-150 Raptor', phone: '+1 555-9012', status: 'CREDIT HOLD', color: '#f59e0b' }
+              ].map(item => (
+                <tr key={item.id} className="hover:bg-slate-50 transition-colors group">
+                  <td className="pl-6 py-5 border-b border-[#f0f2f5]">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-2xl bg-dark-gradient text-white flex items-center justify-center font-extrabold text-[14px] shadow-header group-hover:scale-110 transition-transform">
+                        {item.name.split(' ').map(n => n[0]).join('')}
+                      </div>
+                      <div>
+                        <p className="font-extrabold text-sm m-0 text-text-main tracking-tight leading-none mb-1">{item.name}</p>
+                        <p className="text-[10px] text-text-muted m-0 font-extrabold uppercase tracking-widest">ID: {item.id}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="py-5 border-b border-[#f0f2f5]">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-text-muted shadow-sm border border-slate-100">
+                        <Car size={18} />
+                      </div>
+                      <div>
+                        <p className="text-[13px] font-extrabold text-text-main m-0 tracking-tight">{item.plate}</p>
+                        <p className="text-[11px] text-text-muted m-0 font-medium">{item.type}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="py-5 border-b border-[#f0f2f5]">
+                    <div className="flex flex-col gap-1">
+                      <div className="flex items-center gap-2 text-[13px] font-extrabold text-text-main">
+                        <Phone size={14} className="text-text-muted" /> {item.phone}
+                      </div>
+                    </div>
+                  </td>
+                  <td className="py-5 border-b border-[#f0f2f5]">
+                    <span className="text-[10px] font-extrabold px-3 py-1 rounded-md tracking-wider border uppercase shadow-sm" style={{ color: item.color, backgroundColor: `${item.color}15`, borderColor: `${item.color}30` }}>
+                      {item.status}
+                    </span>
+                  </td>
+                  <td className="pr-6 py-5 border-b border-[#f0f2f5] text-right">
+                    <div className="flex justify-end gap-2">
+                      <button className="px-4 py-2 rounded-xl bg-slate-50 text-text-main text-[11px] font-extrabold uppercase tracking-widest flex items-center gap-2 hover:bg-blue-500 hover:text-white transition-all shadow-sm border border-slate-100 transform active:scale-95 group/btn">
+                        Profile <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
+                      </button>
+                      <button className="p-2 rounded-xl bg-slate-50 text-text-muted hover:text-text-main hover:bg-white transition-all shadow-sm border border-slate-100"><MoreVertical size={16} /></button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <Pagination totalItems={156} itemsPerPage={10} currentPage={1} />
+        </div>
       </div>
     </div>
   );

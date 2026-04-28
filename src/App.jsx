@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import Auth from './pages/Auth';
 
 // Admin Pages
@@ -23,6 +24,7 @@ import CustomerDashboard from './pages/customer/CustomerDashboard';
 import PurchaseHistory from './pages/customer/PurchaseHistory';
 import AppointmentRequests from './pages/customer/AppointmentRequests';
 import BuySell from './pages/customer/BuySell';
+import AssetDetails from './pages/customer/AssetDetails';
 
 // Common Pages
 import Profile from './pages/common/Profile';
@@ -33,6 +35,7 @@ import MenuOverview from './pages/common/MenuOverview';
 const App = () => {
   const [user, setUser] = useState(null); // { email, role }
   const [activeScreen, setActiveScreen] = useState('Financial');
+  const [selectedAsset, setSelectedAsset] = useState(null);
 
   const handleLogin = (userData) => {
     setUser(userData);
@@ -43,6 +46,11 @@ const App = () => {
 
   const handleLogout = () => {
     setUser(null);
+  };
+
+  const handleExploreAsset = (asset) => {
+    setSelectedAsset(asset);
+    setActiveScreen('AssetDetails');
   };
 
   const renderScreen = () => {
@@ -66,7 +74,8 @@ const App = () => {
       case 'CustomerDash': return <CustomerDashboard />;
       case 'History': return <PurchaseHistory />;
       case 'Appointments': return <AppointmentRequests />;
-      case 'Marketplace': return <BuySell />;
+      case 'Marketplace': return <BuySell onExploreAsset={handleExploreAsset} />;
+      case 'AssetDetails': return <AssetDetails asset={selectedAsset} onBack={() => setActiveScreen('Marketplace')} />;
 
       // Common
       case 'Profile': return <Profile />;
@@ -83,18 +92,19 @@ const App = () => {
   }
 
   return (
-    <div className="dashboard-container">
+    <div className="flex p-6 min-h-screen bg-[#f0f2f5]">
       <Sidebar 
         activeScreen={activeScreen} 
         setActiveScreen={setActiveScreen} 
         userRole={user.role} 
         onLogout={handleLogout}
       />
-      <div style={{ flex: 1 }}>
-        <Navbar setActiveScreen={setActiveScreen} />
-        <main className="main-content">
+      <div className="flex-1">
+        <Navbar activeScreen={activeScreen} setActiveScreen={setActiveScreen} />
+        <main className="flex-1 ml-72 pt-2.5">
           {renderScreen()}
         </main>
+        <Footer />
       </div>
     </div>
   );

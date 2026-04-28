@@ -1,86 +1,159 @@
 import React from 'react';
-import { UserPlus, Car, Info, Save } from 'lucide-react';
+import { UserPlus, Car, Info, Save, User, MapPin, Phone, Mail, Hash, ShieldCheck, ChevronRight } from 'lucide-react';
 
 const CustomerRegistration = () => {
   return (
-    <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
+    <div className="pb-10">
+      {/* Strategic Header */}
+      <div className="flex justify-between items-center mb-10">
         <div>
-          <h1 style={{ fontSize: '28px', marginBottom: '8px' }}>Onboard New Customer</h1>
-          <p style={{ color: 'var(--color-text-muted)' }}>Register personal and vehicle information for the system.</p>
+          <h2 className="text-2xl font-extrabold text-text-main m-0 tracking-tight">Onboard New Customer</h2>
+          <p className="text-text-muted text-sm font-medium mt-1">Register personal credentials and vehicle technical specifications.</p>
         </div>
-        <button className="btn btn-primary" onClick={() => alert('Customer Registered!')}>
-          <Save size={18} />
-          Complete Registration
+        <button 
+          className="px-6 py-3 rounded-xl bg-primary text-white text-xs font-extrabold uppercase tracking-widest flex items-center gap-2 hover:bg-black shadow-header transition-all transform active:scale-95"
+          onClick={() => alert('Customer Registered!')}
+        >
+          <Save size={18} /> Complete Registration
         </button>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
-        <div className="card">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
-            <div style={{ width: '32px', height: '32px', borderRadius: '8px', backgroundColor: 'var(--color-primary-light)', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <UserPlus size={18} />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Personal Information Card */}
+        <div className="bg-white rounded-xl shadow-material relative overflow-hidden border border-slate-100">
+          <div className="absolute top-0 left-0 right-0 h-16 rounded-t-xl flex items-center px-6 text-white shadow-header bg-blue-gradient">
+            <div className="flex items-center gap-3">
+              <User size={20} />
+              <h4 className="m-0 text-base font-bold">Personal Information</h4>
             </div>
-            <h4 style={{ margin: 0 }}>Personal Information</h4>
           </div>
           
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <div className="mt-20 p-8 flex flex-col gap-6">
             <div>
-              <p className="label-caps" style={{ padding: 0, color: 'var(--color-text-muted)' }}>Full Name</p>
-              <input type="text" placeholder="e.g. Jane Doe" style={{ width: '100%', padding: '12px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', outline: 'none', fontSize: '14px' }} />
+              <p className="text-[11px] font-extrabold text-text-muted uppercase tracking-widest mb-2">Full Legal Name</p>
+              <div className="relative group">
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted group-focus-within:text-blue-500 transition-colors">
+                  <User size={18} />
+                </div>
+                <input 
+                  type="text" 
+                  placeholder="e.g. Jane Doe" 
+                  className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 text-sm font-extrabold text-text-main outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 shadow-sm transition-all placeholder:text-text-muted/50" 
+                />
+              </div>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <p className="label-caps" style={{ padding: 0, color: 'var(--color-text-muted)' }}>Phone Number</p>
-                <input type="tel" placeholder="+1 (555) 000-0000" style={{ width: '100%', padding: '12px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', outline: 'none', fontSize: '14px' }} />
+                <p className="text-[11px] font-extrabold text-text-muted uppercase tracking-widest mb-2">Primary Phone</p>
+                <div className="relative group">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted group-focus-within:text-blue-500 transition-colors">
+                    <Phone size={18} />
+                  </div>
+                  <input 
+                    type="tel" 
+                    placeholder="+1 (555) 000-0000" 
+                    className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 text-sm font-extrabold text-text-main outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 shadow-sm transition-all placeholder:text-text-muted/50" 
+                  />
+                </div>
               </div>
               <div>
-                <p className="label-caps" style={{ padding: 0, color: 'var(--color-text-muted)' }}>Email Address</p>
-                <input type="email" placeholder="jane@example.com" style={{ width: '100%', padding: '12px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', outline: 'none', fontSize: '14px' }} />
+                <p className="text-[11px] font-extrabold text-text-muted uppercase tracking-widest mb-2">Email Address</p>
+                <div className="relative group">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted group-focus-within:text-blue-500 transition-colors">
+                    <Mail size={18} />
+                  </div>
+                  <input 
+                    type="email" 
+                    placeholder="jane@example.com" 
+                    className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 text-sm font-extrabold text-text-main outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 shadow-sm transition-all placeholder:text-text-muted/50" 
+                  />
+                </div>
               </div>
             </div>
+
             <div>
-              <p className="label-caps" style={{ padding: 0, color: 'var(--color-text-muted)' }}>Primary Address</p>
-              <textarea placeholder="Street, City, Zip" style={{ width: '100%', height: '80px', padding: '12px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', outline: 'none', fontSize: '14px', resize: 'none' }}></textarea>
+              <p className="text-[11px] font-extrabold text-text-muted uppercase tracking-widest mb-2">Service Address</p>
+              <div className="relative group">
+                <div className="absolute left-4 top-4 text-text-muted group-focus-within:text-blue-500 transition-colors">
+                  <MapPin size={18} />
+                </div>
+                <textarea 
+                  placeholder="Street, City, State, Zip Code" 
+                  className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 text-sm font-extrabold text-text-main outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 shadow-sm transition-all placeholder:text-text-muted/50 h-32 resize-none"
+                ></textarea>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="card">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
-            <div style={{ width: '32px', height: '32px', borderRadius: '8px', backgroundColor: 'var(--color-primary-light)', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Car size={18} />
+        {/* Vehicle Specification Card */}
+        <div className="bg-white rounded-xl shadow-material relative overflow-hidden border border-slate-100">
+          <div className="absolute top-0 left-0 right-0 h-16 rounded-t-xl flex items-center px-6 text-white shadow-header bg-dark-gradient">
+            <div className="flex items-center gap-3">
+              <Car size={20} />
+              <h4 className="m-0 text-base font-bold">Vehicle Technical Data</h4>
             </div>
-            <h4 style={{ margin: 0 }}>Vehicle Specification</h4>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+          <div className="mt-20 p-8 flex flex-col gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <p className="label-caps" style={{ padding: 0, color: 'var(--color-text-muted)' }}>License Plate</p>
-                <input type="text" placeholder="ABC-1234" style={{ width: '100%', padding: '12px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', outline: 'none', fontSize: '14px' }} />
+                <p className="text-[11px] font-extrabold text-text-muted uppercase tracking-widest mb-2">License Plate</p>
+                <div className="relative group">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted group-focus-within:text-blue-500 transition-colors">
+                    <Hash size={18} />
+                  </div>
+                  <input 
+                    type="text" 
+                    placeholder="ABC-1234" 
+                    className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 text-sm font-extrabold text-text-main outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 shadow-sm transition-all placeholder:text-text-muted/50" 
+                  />
+                </div>
               </div>
               <div>
-                <p className="label-caps" style={{ padding: 0, color: 'var(--color-text-muted)' }}>Vehicle Type</p>
-                <select style={{ width: '100%', padding: '12px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', outline: 'none', fontSize: '14px', backgroundColor: 'white' }}>
+                <p className="text-[11px] font-extrabold text-text-muted uppercase tracking-widest mb-2">Vehicle Category</p>
+                <select className="w-full px-4 py-3.5 rounded-xl border border-slate-200 text-sm font-extrabold text-text-main outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 shadow-sm bg-white cursor-pointer appearance-none transition-all">
                   <option>Sedan</option>
                   <option>SUV</option>
-                  <option>Truck</option>
+                  <option>Truck / Utility</option>
+                  <option>Performance / Sport</option>
                   <option>Motorcycle</option>
                 </select>
               </div>
             </div>
+
             <div>
-              <p className="label-caps" style={{ padding: 0, color: 'var(--color-text-muted)' }}>Make & Model</p>
-              <input type="text" placeholder="e.g. 2022 Toyota Camry" style={{ width: '100%', padding: '12px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', outline: 'none', fontSize: '14px' }} />
+              <p className="text-[11px] font-extrabold text-text-muted uppercase tracking-widest mb-2">Manufacturer & Model Year</p>
+              <input 
+                type="text" 
+                placeholder="e.g. 2022 Toyota Camry SE" 
+                className="w-full px-5 py-3.5 rounded-xl border border-slate-200 text-sm font-extrabold text-text-main outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 shadow-sm transition-all placeholder:text-text-muted/50" 
+              />
             </div>
+
             <div>
-              <p className="label-caps" style={{ padding: 0, color: 'var(--color-text-muted)' }}>Engine / VIN Number</p>
-              <input type="text" placeholder="17-character VIN" style={{ width: '100%', padding: '12px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', outline: 'none', fontSize: '14px' }} />
+              <p className="text-[11px] font-extrabold text-text-muted uppercase tracking-widest mb-2">Identification Number (VIN)</p>
+              <div className="relative group">
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted group-focus-within:text-blue-500 transition-colors">
+                  <ShieldCheck size={18} />
+                </div>
+                <input 
+                  type="text" 
+                  placeholder="17-character VIN identifier" 
+                  className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 text-sm font-extrabold text-text-main outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 shadow-sm transition-all placeholder:text-text-muted/50 uppercase" 
+                />
+              </div>
             </div>
-            <div style={{ padding: '16px', backgroundColor: 'var(--color-bg-main)', borderRadius: 'var(--radius-sm)', display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-              <Info size={18} style={{ color: 'var(--color-primary)', marginTop: '2px' }} />
-              <p style={{ fontSize: '12px', color: 'var(--color-text-muted)', margin: 0 }}>This information will be used for automated service reminders and part compatibility checks.</p>
+
+            <div className="p-5 bg-slate-50 rounded-2xl border border-slate-100 flex gap-4 items-start shadow-inner">
+              <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-600 shrink-0">
+                <Info size={20} />
+              </div>
+              <div>
+                <p className="m-0 text-xs font-extrabold text-text-main tracking-tight">Automated Compliance Check</p>
+                <p className="m-0 text-[11px] text-text-muted mt-1 leading-relaxed font-medium">This data will be synchronized with our global part compatibility database to provide tailored service reminders.</p>
+              </div>
             </div>
           </div>
         </div>

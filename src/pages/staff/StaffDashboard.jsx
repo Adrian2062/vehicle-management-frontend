@@ -7,126 +7,116 @@ import {
 
 const QuickAction = ({ title, icon: Icon, color, onClick }) => (
   <div 
-    className="card" 
     onClick={onClick}
-    style={{ 
-      padding: '24px', 
-      cursor: 'pointer', 
-      transition: 'all 0.3s ease',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      gap: '12px',
-      border: '1px solid #f1f5f9'
-    }}
+    className="bg-white rounded-2xl shadow-material p-6 flex flex-col items-center gap-4 cursor-pointer border border-slate-100 hover:scale-[1.04] hover:shadow-xl transition-all duration-300 group"
   >
-    <div style={{ 
-      width: '56px', 
-      height: '56px', 
-      borderRadius: '16px', 
-      background: `${color}15`, 
-      color: color, 
-      display: 'flex', 
-      alignItems: 'center', 
-      justifyContent: 'center',
-      boxShadow: `0 8px 16px -4px ${color}25`
-    }}>
-      <Icon size={28} />
+    <div 
+      className="w-16 h-16 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+      style={{ backgroundColor: `${color}15`, color: color, boxShadow: `0 8px 20px -4px ${color}30` }}
+    >
+      <Icon size={30} />
     </div>
-    <h4 style={{ margin: 0, fontSize: '15px', fontWeight: '800' }}>{title}</h4>
+    <h4 className="m-0 text-sm font-extrabold text-text-main tracking-tight text-center">{title}</h4>
   </div>
 );
 
 const StaffDashboard = ({ setActiveScreen }) => {
   return (
-    <div style={{ paddingBottom: '60px' }}>
-      {/* Welcome Section */}
-      <div style={{ 
-        marginBottom: '40px', 
-        padding: '32px', 
-        background: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)', 
-        borderRadius: '24px', 
-        color: 'white',
-        position: 'relative',
-        overflow: 'hidden'
-      }}>
-        <div style={{ position: 'relative', zIndex: 1 }}>
-          <h1 style={{ fontSize: '32px', fontWeight: '800', marginBottom: '8px' }}>Staff Operations Command</h1>
-          <p style={{ opacity: 0.8, fontSize: '16px' }}>Manage registrations, process sales, and monitor customer trends.</p>
+    <div className="pb-10">
+      {/* Hero Welcome Banner */}
+      <div className="mb-10 p-10 bg-dark-gradient rounded-3xl text-white relative overflow-hidden shadow-header">
+        <div className="relative z-10">
+          <p className="text-[11px] font-extrabold uppercase tracking-widest text-white/50 mb-3">STAFF PORTAL — OPERATIONS COMMAND</p>
+          <h1 className="text-4xl font-extrabold m-0 mb-3 tracking-tighter leading-none">Staff Operations Command</h1>
+          <p className="text-white/70 text-base font-medium max-w-lg leading-relaxed">Manage registrations, process sales, and monitor customer trends — all from a single control center.</p>
         </div>
-        <div style={{ position: 'absolute', right: '-20px', bottom: '-20px', opacity: 0.1 }}>
-          <TrendingUp size={200} />
+        <div className="absolute -right-8 -bottom-8 opacity-10 group-hover:scale-110 transition-transform duration-700">
+          <TrendingUp size={240} />
         </div>
       </div>
 
       {/* Quick Actions Grid */}
-      <div style={{ marginBottom: '48px' }}>
-        <h3 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '24px', color: 'var(--color-text-main)' }}>Quick Management Hub</h3>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '24px' }}>
-          <QuickAction title="Register New" icon={UserPlus} color="#1e293b" onClick={() => setActiveScreen('Registration')} />
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-6">
+          <h3 className="text-lg font-extrabold text-text-main m-0 tracking-tight">Quick Management Hub</h3>
+          <div className="h-px flex-1 bg-slate-100"></div>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <QuickAction title="Register New Customer" icon={UserPlus} color="#1e293b" onClick={() => setActiveScreen('Registration')} />
           <QuickAction title="POS Terminal" icon={ShoppingCart} color="#e91e63" onClick={() => setActiveScreen('SalesInvoice')} />
-          <QuickAction title="Customer Lookup" icon={Search} color="#2196f3" onClick={() => setActiveScreen('CustomerSearch')} />
-          <QuickAction title="Performance" icon={BarChart3} color="#4caf50" onClick={() => setActiveScreen('CustomerReports')} />
+          <QuickAction title="Customer Lookup" icon={Search} color="#1A73E8" onClick={() => setActiveScreen('CustomerSearch')} />
+          <QuickAction title="Performance Reports" icon={BarChart3} color="#4caf50" onClick={() => setActiveScreen('CustomerReports')} />
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '32px' }}>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Recent Activity Table */}
-        <div className="card" style={{ padding: 0 }}>
-          <div style={{ padding: '24px', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <h4 style={{ margin: 0, fontWeight: '800' }}>Recent Operations</h4>
-            <button className="btn" style={{ fontSize: '12px', color: 'var(--color-blue)', background: 'transparent', padding: 0 }}>View All</button>
+        <div className="lg:col-span-2 bg-white rounded-xl shadow-material relative overflow-hidden border border-slate-100">
+          <div className="absolute top-0 left-0 right-0 h-16 rounded-t-xl flex items-center px-6 text-white shadow-header bg-dark-gradient">
+            <div className="flex justify-between w-full items-center">
+              <h4 className="m-0 text-base font-bold">Recent Operations</h4>
+              <button className="bg-white/10 border border-white/20 text-white px-4 py-1.5 rounded-lg text-[10px] font-extrabold cursor-pointer hover:bg-white/20 transition-all uppercase tracking-widest">VIEW ALL</button>
+            </div>
           </div>
-          <div style={{ padding: '0 24px' }}>
+          <div className="mt-20 px-6">
             {[
-              { id: '#INV-4401', target: 'Jane Doe', type: 'SALE', amount: '$125.00', time: '12 mins ago', status: 'COMPLETED' },
-              { id: '#REG-9902', target: 'Robert Fox', type: 'REGISTRATION', amount: '-', time: '1 hour ago', status: 'VERIFIED' },
-              { id: '#INV-4403', target: 'Alice Wilson', type: 'SALE', amount: '$450.00', time: '3 hours ago', status: 'PENDING' },
-            ].map((op, idx) => (
-              <div key={idx} style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                padding: '20px 0', 
-                borderBottom: idx !== 2 ? '1px solid #f8fafc' : 'none' 
-              }}>
-                <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#f8fafc', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text-muted)' }}>
+              { id: '#INV-4401', target: 'Jane Doe', type: 'SALE', amount: '$125.00', time: '12 mins ago', status: 'COMPLETED', statusColor: '#10b981' },
+              { id: '#REG-9902', target: 'Robert Fox', type: 'REGISTRATION', amount: '—', time: '1 hour ago', status: 'VERIFIED', statusColor: '#1A73E8' },
+              { id: '#INV-4403', target: 'Alice Wilson', type: 'SALE', amount: '$450.00', time: '3 hours ago', status: 'PENDING', statusColor: '#f59e0b' },
+            ].map((op, idx, arr) => (
+              <div key={idx} className={`flex items-center py-5 gap-4 ${idx !== arr.length - 1 ? 'border-b border-[#f0f2f5]' : ''}`}>
+                <div className="w-11 h-11 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center text-text-muted shadow-sm shrink-0">
                   {op.type === 'SALE' ? <ShoppingCart size={18} /> : <UserPlus size={18} />}
                 </div>
-                <div style={{ flex: 1, paddingLeft: '16px' }}>
-                  <p style={{ margin: 0, fontSize: '14px', fontWeight: '800', color: 'var(--color-text-main)' }}>{op.target}</p>
-                  <p style={{ margin: 0, fontSize: '11px', color: 'var(--color-text-muted)', fontWeight: '600' }}>{op.id} • {op.type}</p>
+                <div className="flex-1 min-w-0">
+                  <p className="m-0 text-sm font-extrabold text-text-main tracking-tight truncate">{op.target}</p>
+                  <p className="m-0 text-[11px] text-text-muted font-extrabold uppercase tracking-widest mt-0.5">{op.id} · {op.type}</p>
                 </div>
-                <div style={{ textAlign: 'right' }}>
-                  <p style={{ margin: 0, fontSize: '14px', fontWeight: '800' }}>{op.amount}</p>
-                  <p style={{ margin: 0, fontSize: '11px', color: '#10b981', fontWeight: '700' }}>{op.status}</p>
+                <div className="text-right shrink-0">
+                  <p className="m-0 text-sm font-extrabold text-text-main tracking-tight">{op.amount}</p>
+                  <span
+                    className="text-[9px] font-extrabold uppercase tracking-widest px-2.5 py-0.5 rounded-md mt-1 inline-block border"
+                    style={{ color: op.statusColor, backgroundColor: `${op.statusColor}15`, borderColor: `${op.statusColor}30` }}
+                  >{op.status}</span>
                 </div>
               </div>
             ))}
           </div>
+          <div className="px-6 py-4 border-t border-[#f0f2f5] text-center">
+            <p className="text-[11px] text-text-muted font-extrabold uppercase tracking-widest opacity-60">Last updated: Just now</p>
+          </div>
         </div>
 
-        {/* Stats Summary */}
-        <div className="card" style={{ background: '#f8fafc', border: 'none' }}>
-          <h4 style={{ marginBottom: '24px', fontWeight: '800' }}>Today's Performance</h4>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <div style={{ background: 'white', padding: '16px', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-              <div style={{ width: '10px', height: '40px', background: 'var(--color-blue)', borderRadius: '4px' }}></div>
-              <div>
-                <p style={{ margin: 0, fontSize: '24px', fontWeight: '800' }}>14</p>
-                <p style={{ margin: 0, fontSize: '12px', color: 'var(--color-text-muted)', fontWeight: '700' }}>NEW CUSTOMERS</p>
-              </div>
+        {/* Today's Performance */}
+        <div className="flex flex-col gap-6">
+          <div className="bg-white rounded-xl shadow-material relative overflow-hidden border border-slate-100">
+            <div className="absolute top-0 left-0 right-0 h-16 rounded-t-xl flex items-center px-6 text-white shadow-header bg-blue-gradient">
+              <h4 className="m-0 text-base font-bold">Today's Performance</h4>
             </div>
-            <div style={{ background: 'white', padding: '16px', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-              <div style={{ width: '10px', height: '40px', background: '#e91e63', borderRadius: '4px' }}></div>
-              <div>
-                <p style={{ margin: 0, fontSize: '24px', fontWeight: '800' }}>$2,840</p>
-                <p style={{ margin: 0, fontSize: '12px', color: 'var(--color-text-muted)', fontWeight: '700' }}>DAILY SALES</p>
+            <div className="mt-20 p-6 flex flex-col gap-5">
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 flex items-center gap-4 hover:shadow-md transition-shadow">
+                <div className="w-1.5 h-12 bg-blue-500 rounded-full shrink-0"></div>
+                <div>
+                  <p className="m-0 text-3xl font-extrabold text-text-main tracking-tighter">14</p>
+                  <p className="m-0 text-[10px] text-text-muted font-extrabold uppercase tracking-widest mt-0.5 opacity-70">NEW CUSTOMERS</p>
+                </div>
               </div>
-            </div>
-            <div style={{ padding: '20px', marginTop: '12px', textAlign: 'center' }}>
-              <p style={{ fontSize: '13px', color: 'var(--color-text-muted)', marginBottom: '16px' }}>You have reached <span style={{ fontWeight: '800', color: 'var(--color-text-main)' }}>85%</span> of your daily target.</p>
-              <div style={{ height: '8px', background: '#e2e8f0', borderRadius: '4px', overflow: 'hidden' }}>
-                <div style={{ width: '85%', height: '100%', background: 'var(--color-blue)' }}></div>
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 flex items-center gap-4 hover:shadow-md transition-shadow">
+                <div className="w-1.5 h-12 bg-pink-500 rounded-full shrink-0"></div>
+                <div>
+                  <p className="m-0 text-3xl font-extrabold text-text-main tracking-tighter">$2,840</p>
+                  <p className="m-0 text-[10px] text-text-muted font-extrabold uppercase tracking-widest mt-0.5 opacity-70">DAILY SALES</p>
+                </div>
+              </div>
+              <div className="pt-2">
+                <div className="flex justify-between items-center mb-3">
+                  <p className="m-0 text-[11px] font-extrabold text-text-muted uppercase tracking-widest opacity-70">DAILY TARGET</p>
+                  <span className="text-[11px] font-extrabold text-blue-500">85%</span>
+                </div>
+                <div className="h-2.5 bg-slate-100 rounded-full overflow-hidden shadow-inner">
+                  <div className="h-full w-[85%] bg-blue-gradient rounded-full shadow-sm transition-all duration-1000"></div>
+                </div>
+                <p className="text-[11px] text-text-muted font-medium mt-2 opacity-60">85% of daily target achieved.</p>
               </div>
             </div>
           </div>

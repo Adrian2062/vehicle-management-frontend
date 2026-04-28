@@ -3,33 +3,41 @@ import {
   FileText, Plus, Search, Trash2, 
   Send, Printer, Download, Save,
   User, Mail, Phone, Hash,
-  ChevronDown, AlertCircle, CheckCircle2
+  ChevronDown, AlertCircle, CheckCircle2,
+  MoreVertical, Calendar, CreditCard, Box
 } from 'lucide-react';
 
 const InvoiceItem = ({ name, sku, price, qty, onRemove }) => (
-  <tr style={{ borderBottom: '1px solid #f0f2f5' }}>
-    <td style={{ padding: '16px 24px' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: '#f8fafc', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <Hash size={14} color="var(--color-text-muted)" />
+  <tr className="hover:bg-slate-50 transition-colors group">
+    <td className="pl-6 py-5 border-b border-[#f0f2f5]">
+      <div className="flex items-center gap-4">
+        <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center text-text-muted shadow-sm group-hover:scale-110 transition-transform">
+          <Box size={18} />
         </div>
         <div>
-          <p style={{ fontWeight: '800', fontSize: '14px', margin: 0 }}>{name}</p>
-          <p style={{ fontSize: '11px', color: 'var(--color-text-muted)', margin: 0 }}>{sku}</p>
+          <p className="font-extrabold text-sm m-0 text-text-main tracking-tight leading-none mb-1">{name}</p>
+          <p className="text-[10px] text-text-muted m-0 font-extrabold uppercase tracking-widest">{sku}</p>
         </div>
       </div>
     </td>
-    <td style={{ padding: '16px' }}><p style={{ margin: 0, fontWeight: '700' }}>${price.toFixed(2)}</p></td>
-    <td style={{ padding: '16px' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <button style={{ width: '24px', height: '24px', borderRadius: '4px', border: '1px solid #d2d6da', background: 'white', cursor: 'pointer' }}>-</button>
-        <span style={{ fontWeight: '800' }}>{qty}</span>
-        <button style={{ width: '24px', height: '24px', borderRadius: '4px', border: '1px solid #d2d6da', background: 'white', cursor: 'pointer' }}>+</button>
+    <td className="py-5 border-b border-[#f0f2f5]">
+      <p className="text-sm font-extrabold text-text-main m-0 tracking-tight">${price.toFixed(2)}</p>
+    </td>
+    <td className="py-5 border-b border-[#f0f2f5]">
+      <div className="flex items-center gap-3">
+        <button className="w-7 h-7 rounded-lg border border-slate-200 bg-white flex items-center justify-center text-text-main hover:bg-slate-50 hover:border-blue-500 transition-all shadow-sm active:scale-90">-</button>
+        <span className="text-sm font-extrabold text-text-main w-6 text-center">{qty}</span>
+        <button className="w-7 h-7 rounded-lg border border-slate-200 bg-white flex items-center justify-center text-text-main hover:bg-slate-50 hover:border-blue-500 transition-all shadow-sm active:scale-90">+</button>
       </div>
     </td>
-    <td style={{ padding: '16px', fontWeight: '800' }}>${(price * qty).toFixed(2)}</td>
-    <td style={{ padding: '16px 24px', textAlign: 'right' }}>
-      <button onClick={onRemove} style={{ color: '#f44336', background: 'transparent', border: 'none', cursor: 'pointer' }}>
+    <td className="py-5 border-b border-[#f0f2f5]">
+      <p className="text-sm font-extrabold text-text-main m-0 tracking-tight">${(price * qty).toFixed(2)}</p>
+    </td>
+    <td className="pr-6 py-5 border-b border-[#f0f2f5] text-right">
+      <button 
+        onClick={onRemove} 
+        className="p-2 rounded-lg bg-slate-50 text-red-400 hover:text-red-600 hover:bg-red-50 transition-all shadow-sm border border-slate-100"
+      >
         <Trash2 size={16} />
       </button>
     </td>
@@ -38,47 +46,51 @@ const InvoiceItem = ({ name, sku, price, qty, onRemove }) => (
 
 const SalesInvoice = () => {
   return (
-    <div style={{ paddingBottom: '40px' }}>
-      {/* Dynamic Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
+    <div className="pb-10">
+      {/* Dynamic Strategic Header */}
+      <div className="flex justify-between items-center mb-10">
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '4px' }}>
-            <h2 style={{ fontSize: '24px', fontWeight: '800', color: 'var(--color-text-main)', margin: 0 }}>Create Sales Invoice</h2>
-            <span style={{ fontSize: '10px', fontWeight: '800', padding: '4px 12px', borderRadius: '6px', background: '#f8fafc', border: '1px solid #d2d6da', color: 'var(--color-text-muted)' }}>DRAFT #INV-4022</span>
+          <div className="flex items-center gap-4 mb-2">
+            <h2 className="text-2xl font-extrabold text-text-main m-0 tracking-tight">Create Sales Invoice</h2>
+            <span className="px-3 py-1 rounded-lg bg-slate-100 border border-slate-200 text-[10px] font-extrabold text-text-muted uppercase tracking-widest shadow-sm">DRAFT #INV-4022</span>
           </div>
-          <p style={{ color: 'var(--color-text-muted)', fontSize: '14px' }}>Build professional invoices with automated tax and inventory tracking.</p>
+          <p className="text-text-muted text-sm font-medium">Generate high-fidelity invoices with integrated tax and stock reconciliation.</p>
         </div>
-        <div style={{ display: 'flex', gap: '12px' }}>
-          <button className="btn" style={{ background: 'white', border: '1px solid #d2d6da', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Save size={16} /> Save Progress
+        <div className="flex gap-3">
+          <button className="px-5 py-2.5 rounded-xl bg-white border border-slate-200 text-text-main text-xs font-extrabold uppercase tracking-widest flex items-center gap-2 hover:bg-slate-50 shadow-sm transition-all">
+            <Save size={16} /> Save Draft
           </button>
-          <button className="btn btn-primary" style={{ background: 'var(--color-blue)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Send size={16} /> Finalize & Send
+          <button className="px-7 py-3 rounded-xl bg-blue-500 text-white text-xs font-extrabold uppercase tracking-widest flex items-center gap-2 hover:bg-black shadow-header transition-all transform active:scale-95">
+            <Send size={16} /> Finalize & Transmit
           </button>
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '32px' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-          {/* Item Builder Card */}
-          <div className="card card-with-header" style={{ padding: 0 }}>
-            <div className="card-header-float header-dark">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-                <h4 style={{ color: 'white', margin: 0, fontSize: '16px', fontWeight: '700' }}>Invoice Line Items</h4>
-                <button style={{ background: 'var(--color-blue)', color: 'white', border: 'none', padding: '6px 16px', borderRadius: '6px', fontSize: '11px', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Plus size={14} /> ADD ITEM
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2 flex flex-col gap-10">
+          {/* Main Item Builder */}
+          <div className="bg-white rounded-xl shadow-material relative overflow-hidden border border-slate-100">
+            <div className="absolute top-0 left-0 right-0 h-16 rounded-t-xl flex items-center px-6 text-white shadow-header bg-dark-gradient">
+              <div className="flex justify-between w-full items-center">
+                <div className="flex items-center gap-3">
+                  <Hash size={18} className="text-white/60" />
+                  <h4 className="m-0 text-base font-bold">Line Item Assets</h4>
+                </div>
+                <button className="px-4 py-1.5 rounded-lg bg-blue-500 text-white text-[10px] font-extrabold uppercase tracking-widest hover:bg-blue-600 transition-all border border-white/10 flex items-center gap-2">
+                  <Plus size={14} /> Add Inventory Entry
                 </button>
               </div>
             </div>
-            <div style={{ marginTop: '80px' }}>
-              <table style={{ width: '100%' }}>
+            
+            <div className="mt-20">
+              <table className="w-full border-collapse">
                 <thead>
-                  <tr style={{ background: '#f8fafc' }}>
-                    <th style={{ paddingLeft: '24px' }}>ITEM DESCRIPTION</th>
-                    <th>UNIT PRICE</th>
-                    <th>QTY</th>
-                    <th>TOTAL</th>
-                    <th style={{ textAlign: 'right', paddingRight: '24px' }}></th>
+                  <tr className="bg-slate-50/50">
+                    <th className="pl-6 py-4 text-[11px] uppercase text-text-muted font-extrabold border-b border-[#f0f2f5] text-left">SPECIFICATION</th>
+                    <th className="py-4 text-[11px] uppercase text-text-muted font-extrabold border-b border-[#f0f2f5] text-left">UNIT PRICE</th>
+                    <th className="py-4 text-[11px] uppercase text-text-muted font-extrabold border-b border-[#f0f2f5] text-left">QUANTITY</th>
+                    <th className="py-4 text-[11px] uppercase text-text-muted font-extrabold border-b border-[#f0f2f5] text-left">SUBTOTAL</th>
+                    <th className="pr-6 py-4 border-b border-[#f0f2f5] text-right"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -87,85 +99,105 @@ const SalesInvoice = () => {
                 </tbody>
               </table>
               
-              <div style={{ padding: '32px 24px', borderTop: '1px solid #f0f2f5', display: 'flex', justifyContent: 'flex-end' }}>
-                <div style={{ width: '240px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: '14px', color: 'var(--color-text-muted)', fontWeight: '700' }}>Subtotal</span>
-                    <span style={{ fontSize: '14px', fontWeight: '800' }}>$214.99</span>
+              <div className="p-8 border-t border-[#f0f2f5] flex justify-end">
+                <div className="w-64 flex flex-col gap-4">
+                  <div className="flex justify-between items-center group">
+                    <span className="text-sm font-extrabold text-text-muted tracking-tight group-hover:text-text-main transition-colors">Subtotal (USD)</span>
+                    <span className="text-sm font-extrabold text-text-main">$214.99</span>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: '14px', color: 'var(--color-text-muted)', fontWeight: '700' }}>VAT (15%)</span>
-                    <span style={{ fontSize: '14px', fontWeight: '800' }}>$32.25</span>
+                  <div className="flex justify-between items-center group">
+                    <span className="text-sm font-extrabold text-text-muted tracking-tight group-hover:text-text-main transition-colors">Taxation (15%)</span>
+                    <span className="text-sm font-extrabold text-text-main">$32.25</span>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '12px', paddingTop: '12px', borderTop: '2px solid #f0f2f5' }}>
-                    <span style={{ fontSize: '18px', fontWeight: '800', color: 'var(--color-text-main)' }}>Total Amount</span>
-                    <span style={{ fontSize: '18px', fontWeight: '800', color: 'var(--color-blue)' }}>$247.24</span>
+                  <div className="flex justify-between items-center mt-2 pt-4 border-t-2 border-slate-100">
+                    <span className="text-lg font-extrabold text-text-main tracking-tighter">Total Payable</span>
+                    <span className="text-2xl font-extrabold text-blue-500 tracking-tighter">$247.24</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Notes Section */}
-          <div className="card" style={{ padding: '24px' }}>
-            <h4 style={{ margin: 0, fontSize: '15px', fontWeight: '800', marginBottom: '16px' }}>Invoice Notes & Terms</h4>
+          {/* Internal Memo Card */}
+          <div className="bg-white rounded-xl shadow-material p-8 border border-slate-100">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-text-muted shadow-sm border border-slate-100">
+                <FileText size={20} />
+              </div>
+              <h4 className="m-0 text-base font-bold text-text-main">Billing Notes & Terms</h4>
+            </div>
             <textarea 
-              placeholder="Add payment terms or service notes here..." 
-              style={{ width: '100%', height: '100px', padding: '16px', borderRadius: '12px', border: '1px solid #d2d6da', outline: 'none', fontSize: '14px' }}
+              placeholder="Include specific warranty terms or service notes here..." 
+              className="w-full px-5 py-4 rounded-xl border border-slate-200 text-sm font-medium text-text-main outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 shadow-sm placeholder:text-text-muted/40 h-32 resize-none transition-all"
             ></textarea>
           </div>
         </div>
 
-        {/* Right Sidebar: Contextual Data */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-          <div className="card card-with-header">
-            <div className="card-header-float header-blue">
-              <h4 style={{ color: 'white', margin: 0, fontSize: '16px', fontWeight: '700' }}>Client Information</h4>
+        {/* Right Information Hub */}
+        <div className="flex flex-col gap-8">
+          <div className="bg-white rounded-xl shadow-material relative overflow-hidden border border-slate-100">
+            <div className="absolute top-0 left-0 right-0 h-16 rounded-t-xl flex items-center px-6 text-white shadow-header bg-blue-gradient">
+              <h4 className="m-0 text-base font-bold">Client Metadata</h4>
             </div>
-            <div style={{ marginTop: '56px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
-                <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: 'var(--color-dark)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <User size={24} />
+            <div className="mt-20 p-8 pt-4">
+              <div className="flex items-center gap-5 mb-8 p-4 rounded-2xl bg-slate-50 border border-slate-100 shadow-inner group">
+                <div className="w-14 h-14 rounded-2xl bg-dark-gradient flex items-center justify-center text-white shadow-header group-hover:rotate-3 transition-transform">
+                  <User size={28} />
                 </div>
                 <div>
-                  <h4 style={{ margin: 0, fontSize: '18px', fontWeight: '800' }}>Adrian Smith</h4>
-                  <p style={{ margin: 0, fontSize: '11px', color: 'var(--color-text-muted)', fontWeight: '800' }}>CUSTOMER ID: #CS-8891</p>
+                  <h4 className="m-0 text-xl font-extrabold text-text-main tracking-tighter">Adrian Smith</h4>
+                  <p className="m-0 text-[10px] font-extrabold text-blue-500 uppercase tracking-widest mt-0.5">#CS-8891 · GOLD MEMBER</p>
                 </div>
               </div>
               
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <Mail size={16} color="var(--color-text-muted)" />
-                  <span style={{ fontSize: '13px', fontWeight: '700' }}>adrian@example.com</span>
+              <div className="flex flex-col gap-5 px-2">
+                <div className="flex items-center gap-4 group">
+                  <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center text-text-muted group-hover:bg-blue-50 group-hover:text-blue-500 transition-all border border-slate-100">
+                    <Mail size={16} />
+                  </div>
+                  <span className="text-sm font-extrabold text-text-main tracking-tight">adrian@example.com</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <Phone size={16} color="var(--color-text-muted)" />
-                  <span style={{ fontSize: '13px', fontWeight: '700' }}>+1 (555) 902-1144</span>
+                <div className="flex items-center gap-4 group">
+                  <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center text-text-muted group-hover:bg-blue-50 group-hover:text-blue-500 transition-all border border-slate-100">
+                    <Phone size={16} />
+                  </div>
+                  <span className="text-sm font-extrabold text-text-main tracking-tight">+1 (555) 902-1144</span>
                 </div>
               </div>
 
-              <div style={{ marginTop: '24px', paddingTop: '24px', borderTop: '1px solid #f0f2f5' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
-                  <span style={{ fontSize: '12px', fontWeight: '800', color: 'var(--color-text-muted)' }}>CREDIT SCORE</span>
-                  <span style={{ fontSize: '12px', fontWeight: '800', color: '#4caf50' }}>EXCELLENT</span>
+              <div className="mt-8 pt-8 border-t border-[#f0f2f5]">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-[11px] font-extrabold text-text-muted uppercase tracking-widest">CREDIT RELIABILITY</span>
+                  <span className="text-[11px] font-extrabold text-green-500">EXCELLENT</span>
                 </div>
-                <div style={{ height: '4px', background: '#f0f2f5', borderRadius: '2px', overflow: 'hidden' }}>
-                  <div style={{ width: '92%', height: '100%', background: '#4caf50' }}></div>
+                <div className="h-2 bg-slate-100 rounded-full overflow-hidden shadow-inner">
+                  <div className="h-full w-[92%] bg-green-500 rounded-full shadow-sm"></div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="card" style={{ background: '#f8fafc', border: '1px solid #d2d6da' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-              <AlertCircle size={20} color="#fb8c00" />
-              <h4 style={{ margin: 0, fontSize: '14px', fontWeight: '800' }}>Billing Instructions</h4>
+          <div className="bg-orange-50 border border-orange-200 rounded-xl p-6 shadow-sm relative overflow-hidden group">
+            <div className="absolute -right-6 -bottom-6 text-orange-200 group-hover:scale-110 transition-transform duration-700">
+              <AlertCircle size={100} />
             </div>
-            <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '13px', color: 'var(--color-text-muted)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <li>Ensure part numbers match the physical stock labels.</li>
-              <li>Apply the <strong>5% Gold Member</strong> discount if applicable.</li>
-              <li>Verification required for amounts over $5,000.</li>
-            </ul>
+            <div className="relative z-10">
+              <div className="flex items-center gap-3 mb-4">
+                <AlertCircle size={20} className="text-orange-600" />
+                <h4 className="m-0 text-sm font-extrabold text-orange-900 uppercase tracking-tight">Verification Guidelines</h4>
+              </div>
+              <ul className="m-0 pl-0 space-y-3 list-none">
+                {[
+                  'Cross-reference part IDs with ERP labels.',
+                  'Apply 5% Gold Member loyalty discount.',
+                  'Manager override needed for >$5,000.'
+                ].map((text, i) => (
+                  <li key={i} className="flex gap-3 text-xs font-bold text-orange-800/80 leading-relaxed">
+                    <CheckCircle2 size={14} className="shrink-0 text-orange-500 mt-0.5" /> {text}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
