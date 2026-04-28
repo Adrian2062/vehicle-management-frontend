@@ -14,7 +14,8 @@ import {
   LogOut,
   BarChart,
   Mail,
-  ClipboardList
+  ClipboardList,
+  ShoppingBag
 } from 'lucide-react';
 
 const Sidebar = ({ activeScreen, setActiveScreen, userRole, onLogout }) => {
@@ -57,6 +58,7 @@ const Sidebar = ({ activeScreen, setActiveScreen, userRole, onLogout }) => {
         {userRole === 'customer' && (
           <>
             <NavItem id="CustomerDash" label="Dashboard" icon={Home} />
+            <NavItem id="Marketplace" label="Buy/Sell" icon={ShoppingBag} />
             <NavItem id="History" label="History" icon={Clock} />
             <NavItem id="Appointments" label="Requests" icon={Calendar} />
           </>

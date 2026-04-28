@@ -22,6 +22,7 @@ import EmailInvoice from './pages/staff/EmailInvoice';
 import CustomerDashboard from './pages/customer/CustomerDashboard';
 import PurchaseHistory from './pages/customer/PurchaseHistory';
 import AppointmentRequests from './pages/customer/AppointmentRequests';
+import BuySell from './pages/customer/BuySell';
 
 // Common Pages
 import Profile from './pages/common/Profile';
@@ -65,6 +66,7 @@ const App = () => {
       case 'CustomerDash': return <CustomerDashboard />;
       case 'History': return <PurchaseHistory />;
       case 'Appointments': return <AppointmentRequests />;
+      case 'Marketplace': return <BuySell />;
 
       // Common
       case 'Profile': return <Profile />;
