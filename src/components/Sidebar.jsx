@@ -23,11 +23,13 @@ import {
 } from 'lucide-react';
 
 const Sidebar = ({ activeScreen, setActiveScreen, userRole, onLogout }) => {
+  const normalizedRole = userRole?.toLowerCase();
+
   const getRoleInfo = () => {
-    switch (userRole) {
-      case 'admin': return { label: 'ADMIN CONTROL', color: 'text-blue-400', bg: 'bg-blue-400/10', icon: Shield };
-      case 'staff': return { label: 'STAFF PORTAL', color: 'text-emerald-400', bg: 'bg-emerald-400/10', icon: Activity };
-      case 'customer': return { label: 'CUSTOMER HUB', color: 'text-orange-400', bg: 'bg-orange-400/10', icon: UserCircle2 };
+    switch (normalizedRole) {
+      case 'admin': return { label: 'ADMIN CONTROL', color: 'text-[#fcd20b]', bg: 'bg-[#fcd20b]/10', icon: Shield };
+      case 'staff': return { label: 'STAFF PORTAL', color: 'text-[#fcd20b]', bg: 'bg-[#fcd20b]/10', icon: Activity };
+      case 'customer': return { label: 'CUSTOMER HUB', color: 'text-[#fcd20b]', bg: 'bg-[#fcd20b]/10', icon: UserCircle2 };
       default: return { label: 'SYSTEM ACCESS', color: 'text-slate-400', bg: 'bg-slate-400/10', icon: Zap };
     }
   };
@@ -53,44 +55,46 @@ const Sidebar = ({ activeScreen, setActiveScreen, userRole, onLogout }) => {
 
   const NavItem = ({ id, label, icon: Icon }) => (
     <div 
-      className={`group flex items-center gap-4 mx-4 my-1 px-5 py-3.5 rounded-xl text-white/60 cursor-pointer transition-all duration-300 relative overflow-hidden ${
+      className={`group flex items-center gap-4 mx-4 my-1 px-6 py-4 rounded-full cursor-pointer transition-all duration-300 relative overflow-hidden ${
         activeScreen === id 
-        ? 'bg-blue-gradient text-white shadow-header scale-105 z-10' 
-        : 'hover:bg-white/5 hover:text-white hover:pl-6'
+        ? 'bg-[#fcd20b] text-[#111111] shadow-xl scale-105 z-10' 
+        : 'text-white/60 hover:text-[#fcd20b] hover:bg-white/5'
       }`}
       onClick={() => setActiveScreen(id)}
     >
-      <Icon size={18} className={`${activeScreen === id ? 'text-white' : 'group-hover:scale-110 transition-transform'}`} />
-      <span className="text-[13px] font-extrabold uppercase tracking-widest">{label}</span>
+      <Icon size={18} className={`${activeScreen === id ? 'text-[#111111]' : 'group-hover:scale-110 transition-transform'}`} />
+      <span className="text-[11px] font-bold uppercase tracking-[0.15em] font-oswald">{label}</span>
       {activeScreen === id && (
-        <div className="absolute right-0 top-0 bottom-0 w-1 bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)]"></div>
+        <div className="absolute right-4 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#111111]"></div>
       )}
     </div>
   );
 
   return (
-    <div className="w-[280px] h-[calc(100vh-48px)] bg-dark-gradient rounded-3xl fixed left-6 top-6 flex flex-col py-8 z-[1000] shadow-material border border-white/5">
-      {/* Dynamic Role Header */}
-      <div className="px-8 mb-10">
-        <div className="flex flex-col gap-1 mb-6">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-white shadow-sm border border-white/10">
-              <Package size={18} />
+    <div className="w-[300px] h-screen bg-[#111111] fixed left-0 top-0 flex flex-col py-10 z-[1000] border-r border-white/5 font-roboto">
+      {/* Brand Header */}
+      <div className="px-10 mb-12">
+        <div className="flex flex-col gap-1 mb-8">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-12 h-12 rounded-2xl bg-[#fcd20b] flex items-center justify-center text-[#111111] shadow-lg shadow-[#fcd20b]/20">
+              <Package size={24} />
             </div>
-            <h3 className="text-white text-lg font-black tracking-tighter m-0">AutoPart <span className="text-blue-400">Pro</span></h3>
+            <div>
+              <h3 className="text-white text-xl font-bold tracking-tighter m-0 font-oswald italic">VEHICLE <span className="text-[#fcd20b]">PARTS</span></h3>
+              <p className="text-[9px] text-white/40 font-black tracking-widest uppercase">Premium Management</p>
+            </div>
           </div>
-          <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg ${roleInfo.bg} ${roleInfo.color} border border-current/20`}>
+          <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl ${roleInfo.bg} ${roleInfo.color} border border-[#fcd20b]/20`}>
             <roleInfo.icon size={14} />
-            <span className="text-[10px] font-black uppercase tracking-[0.15em]">{roleInfo.label}</span>
+            <span className="text-[9px] font-bold uppercase tracking-[0.2em] font-oswald">{roleInfo.label}</span>
           </div>
         </div>
-        <div className="h-px bg-gradient-to-r from-white/20 via-white/5 to-transparent"></div>
       </div>
       
-      <div className="overflow-y-auto flex-1 px-2 space-y-1">
-        {userRole === 'admin' && adminLinks.map(link => <NavItem key={link.id} {...link} />)}
-        {userRole === 'staff' && staffLinks.map(link => <NavItem key={link.id} {...link} />)}
-        {userRole === 'customer' && (
+      <div className="overflow-y-auto flex-1 px-2 space-y-1 scrollbar-hide">
+        {normalizedRole === 'admin' && adminLinks.map(link => <NavItem key={link.id} {...link} />)}
+        {normalizedRole === 'staff' && staffLinks.map(link => <NavItem key={link.id} {...link} />)}
+        {normalizedRole === 'customer' && (
           <>
             <NavItem id="CustomerDash" label="Performance" icon={Home} />
             <NavItem id="Marketplace" label="Marketplace" icon={ShoppingBag} />
@@ -100,25 +104,25 @@ const Sidebar = ({ activeScreen, setActiveScreen, userRole, onLogout }) => {
         )}
       </div>
 
-      <div className="px-6 mt-6">
-        <div className="p-1 rounded-2xl bg-white/5 border border-white/5 mb-4 group cursor-pointer hover:bg-white/10 transition-all" onClick={() => setActiveScreen('Profile')}>
-          <div className="flex items-center gap-3 p-2">
-            <div className="w-10 h-10 rounded-xl bg-blue-gradient flex items-center justify-center text-white font-black text-sm shadow-header">
+      <div className="px-8 mt-auto pt-8">
+        <div className="p-1 rounded-2xl bg-white/5 border border-white/5 mb-6 group cursor-pointer hover:bg-white/10 transition-all" onClick={() => setActiveScreen('Profile')}>
+          <div className="flex items-center gap-4 p-3">
+            <div className="w-11 h-11 rounded-xl bg-[#fcd20b] flex items-center justify-center text-[#111111] font-bold text-sm shadow-lg">
               {userRole[0].toUpperCase()}
             </div>
             <div className="flex-1">
-              <p className="text-xs font-black text-white uppercase tracking-widest m-0">Account</p>
-              <p className="text-[10px] text-white/40 m-0 font-bold">Manage Profile</p>
+              <p className="text-[10px] font-bold text-white uppercase tracking-widest m-0 font-oswald">Admin Portal</p>
+              <p className="text-[9px] text-white/40 m-0 font-bold tracking-tight">System Operator</p>
             </div>
           </div>
         </div>
         
         <button 
           onClick={onLogout}
-          className="w-full py-4 bg-red-500 text-white border-none rounded-2xl flex items-center justify-center gap-3 text-xs font-black uppercase tracking-[0.2em] cursor-pointer hover:bg-black transition-all shadow-header transform active:scale-95"
+          className="w-full py-5 bg-[#fcd20b] text-[#111111] border-none rounded-full flex items-center justify-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] cursor-pointer hover:bg-white transition-all shadow-xl font-oswald transform active:scale-95"
         >
           <LogOut size={16} />
-          Sign Out
+          Safe Termination
         </button>
       </div>
     </div>
